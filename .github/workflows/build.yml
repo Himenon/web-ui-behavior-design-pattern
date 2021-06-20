@@ -23,6 +23,8 @@ jobs:
 
       - name: Test & Build
         run: |
+          git config --global user.email "actions@gihub.com"
+          git config --global user.name "github-actions[bot]"
           yarn install --frozen-lockfile
           yarn build
           yarn test
