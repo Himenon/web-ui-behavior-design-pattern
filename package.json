@@ -48,6 +48,7 @@
     "webpack:serve": "webpack serve",
     "webpack:build": "webpack",
     "code:format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,yml,yaml,md,html}\"",
+    "test": "echo \"test\"",
     "typed:scss:build": "tsm \"src/**/*.scss\" --implementation \"sass\" --aliasPrefixes.~ node_modules/",
     "typed:scss:watch": "yarn typed:scss:build --watch",
     "ts": "ts-node -P tsconfig.script.json",
