@@ -1,8 +1,12 @@
 const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === "production";
+const isDevServer = false;
 
 const cssLoaders = [
   {
@@ -51,20 +55,34 @@ const config = {
   devtool: "eval-source-map",
   output: {
     path: path.join(__dirname, "dist"),
+    clean: true,
     pathinfo: false,
     publicPath: "/", // for react-router and historyApiFallback
   },
   optimization: {
     minimize: isProduction,
+    minimizer: ["...", new CssMinimizerPlugin()],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: "public/index.html",
-      inject: "head",
-      scriptLoading: "defer",
-      PUBLIC_URL: "AA",
-    }),
-  ],
+    !isDevServer &&
+      new BundleAnalyzerPlugin({
+        analyzerMode: "static",
+        reportFilename: "../docs/bundle-analyzer.html",
+        openAnalyzer: true,
+        defaultSizes: "stat",
+      }),
+    !isDevServer &&
+      new MiniCssExtractPlugin({
+        filename: "stylesheets/[name].[chunkhash:10].css",
+      }),
+    isDevServer &&
+      new HtmlWebpackPlugin({
+        template: "public/index.html",
+        inject: "head",
+        scriptLoading: "defer",
+        PUBLIC_URL: "AA",
+      }),
+  ].filter(Boolean),
   devServer: {
     contentBase: "./dist",
     compress: true,
@@ -88,7 +106,17 @@ const config = {
       },
       {
         test: /\.s?css$/,
-        use: [{ loader: "style-loader", options: { esModule: false } }, ...cssLoaders],
+        use: [
+          isDevServer
+            ? { loader: "style-loader", options: { esModule: false } }
+            : {
+                loader: MiniCssExtractPlugin.loader,
+                options: {
+                  esModule: false,
+                },
+              },
+          ...cssLoaders,
+        ],
       },
     ],
   },
