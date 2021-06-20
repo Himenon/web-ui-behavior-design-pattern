@@ -1,0 +1,6 @@
+@import "../../bootstrap/bootstrap.scss";
+
+.button {
+  composes: btn;
+  composes: btn-primary;
+}

@@ -1,0 +1,16 @@
+.nav-item {
+  composes: navbar from "../../bootstrap/bootstrap.scss";
+  composes: navbar-expand-lg from "../../bootstrap/bootstrap.scss";
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.nav-link {
+  composes: nav-link from "../../bootstrap/bootstrap.scss";
+
+  &:hover {
+    cursor: pointer;
+  }
+}

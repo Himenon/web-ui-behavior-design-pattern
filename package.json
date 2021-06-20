@@ -1,0 +1,63 @@
+{
+  "name": "@himenon/behavior-design-pattern-for-web-ui",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "license": "MIT",
+  "keywords": [],
+  "main": "src/index.tsx",
+  "dependencies": {
+    "bootstrap": "^5.0.1",
+    "mobx": "^6.3.2",
+    "mobx-react": "^7.2.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0",
+    "web-vitals": "^2.0.1"
+  },
+  "devDependencies": {
+    "@actions/github": "^5.0.0",
+    "@himenon/performance-report": "^0.5.3",
+    "@octokit/rest": "^18.6.0",
+    "@types/node": "^15.12.2",
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.7",
+    "@types/react-router-dom": "^5.1.7",
+    "autoprefixer": "^10.2.6",
+    "css-loader": "^5.2.6",
+    "fibers": "^5.0.0",
+    "html-webpack-plugin": "^5.3.1",
+    "npm-run-all": "^4.1.5",
+    "postcss-loader": "^6.1.0",
+    "prettier": "^2.3.1",
+    "sass": "1.32.13",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^2.0.0",
+    "ts-loader": "^9.2.3",
+    "ts-node": "^10.0.0",
+    "typed-scss-modules": "^4.1.1",
+    "typescript": "^4.3.2",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "scripts": {
+    "develop": "run-p webpack:serve typed:scss:watch",
+    "build": "run-s typed:scss:build webpack:build",
+    "start": "yarn develop",
+    "webpack:serve": "webpack serve",
+    "webpack:build": "webpack",
+    "code:format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,yml,yaml,md,html}\"",
+    "typed:scss:build": "tsm \"src/**/*.scss\" --implementation \"sass\" --aliasPrefixes.~ node_modules/",
+    "typed:scss:watch": "yarn typed:scss:build --watch",
+    "ts": "ts-node -P tsconfig.script.json",
+    "check:pr": "yarn ts ./scripts/check-pr",
+    "check:merge": "yarn ts ./scripts/check-merge"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

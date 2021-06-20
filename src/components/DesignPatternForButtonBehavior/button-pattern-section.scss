@@ -1,0 +1,29 @@
+@import "../bootstrap/bootstrap.scss";
+
+.pattern-section {
+  composes: pattern-section from "./case/pattern-section.scss";
+}
+
+.button-column {
+  composes: column from "./case/column.scss";
+  composes: position-relative;
+  height: 160px;
+  text-align: center;
+  border: 1px solid #ccc;
+  background-color: #f8f9fa;
+}
+
+.row {
+  composes: row from "./case/row.scss";
+  composes: row-cols-1;
+}
+
+.button {
+  composes: button from "./base/button.scss";
+  composes: position-absolute top-50 start-50 translate-middle;
+  display: inline-block;
+}
+
+.status {
+  composes: status from "./case/status.scss";
+}

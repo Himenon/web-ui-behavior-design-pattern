@@ -1,0 +1,5 @@
+@import "../../bootstrap/bootstrap.scss";
+
+.row {
+  composes: row;
+}

@@ -1,0 +1,8 @@
+.DS_Store
+node_modules
+dist
+lib
+module/
+umd/
+cjs/
+src/**/*.scss.d.ts
