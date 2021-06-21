@@ -73,7 +73,7 @@ const config = {
       }),
     !isDevServer &&
       new MiniCssExtractPlugin({
-        filename: "stylesheets/[name].[chunkhash:10].css",
+        filename: "[name].css",
       }),
     isDevServer &&
       new HtmlWebpackPlugin({
