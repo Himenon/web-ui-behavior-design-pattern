@@ -1,13 +1,57 @@
+import * as express from "express";
 import * as webpack from "webpack";
 import * as webpackDevServer from "webpack-dev-server";
 import * as path from "path";
+import * as resolvePkg from "resolve-pkg";
+
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
+const devServerPort = 3000;
 const isProduction = process.env.NODE_ENV === "production";
 const isDevServer = process.env.DEV_SERVER === "true";
+const publicPath = isProduction ? "/" : `http://localhost:${devServerPort}`;
+
+export const find = (searchPath: string): string => {
+  const p = resolvePkg(searchPath);
+  if (p) {
+    return p;
+  }
+  throw new Error(`Not found: ${searchPath}`);
+};
+
+const devServerPlugins: webpack.Configuration["plugins"] = [
+  new HtmlWebpackPlugin({
+    template: "public/index.html",
+    inject: "head",
+    scriptLoading: "defer",
+    PUBLIC_URL: "AA",
+    React: isProduction ? publicPath + "/scripts/react.production.min.js" : "/scripts/react.development.js",
+    ReactDOM: isProduction ? publicPath + "/scripts/react-dom.production.min.js" : "/scripts/react-dom.development.js",
+  }),
+];
+
+const buildPlugins: webpack.Configuration["plugins"] = [
+  new BundleAnalyzerPlugin({
+    analyzerMode: "static",
+    reportFilename: "../docs/bundle-analyzer.html",
+    openAnalyzer: true,
+    defaultSizes: "stat",
+  }),
+  new MiniCssExtractPlugin({
+    filename: "[name].css",
+  }),
+  new CopyPlugin({
+    patterns: [
+      { from: "node_modules/bootstrap/dist/css/bootstrap.min.css", to: "stylesheets/bootstrap.min.css" },
+      { from: "node_modules/react/umd/react.production.min.js", to: "js/react.production.min.js" },
+      { from: "node_modules/react-dom/umd/react-dom.production.min.js", to: "js/react-dom.production.min.js" },
+    ],
+  }),
+];
 
 const createCssLoader = (localIdentName: string) => [
   {
@@ -77,35 +121,21 @@ const config: webpack.Configuration & { devServer?: webpackDevServer.Configurati
       },
     },
   },
-  plugins: [
-    !isDevServer &&
-      new BundleAnalyzerPlugin({
-        analyzerMode: "static",
-        reportFilename: "../docs/bundle-analyzer.html",
-        openAnalyzer: true,
-        defaultSizes: "stat",
-      }),
-    !isDevServer &&
-      new MiniCssExtractPlugin({
-        filename: "[name].css",
-      }),
-    isDevServer &&
-      new HtmlWebpackPlugin({
-        template: "public/index.html",
-        inject: "head",
-        scriptLoading: "defer",
-        PUBLIC_URL: "AA",
-      }),
-  ].filter(Boolean),
+  plugins: isDevServer ? devServerPlugins : buildPlugins,
   devServer: {
     contentBase: "./dist",
     compress: true,
-    port: 3000,
+    port: devServerPort,
     disableHostCheck: true,
     open: true,
     historyApiFallback: {
       from: /^\/*/,
       to: "/",
+    },
+    before: (app: express.Application, _server: any) => {
+      app.use("/favicon.ico", express.static("public/favicon.ico"));
+      app.use("/scripts/react.development.js", express.static(find("react/umd/react.development.js")));
+      app.use("/scripts/react-dom.development.js", express.static(find("react-dom/umd/react-dom.development.js")));
     },
   },
   module: {
@@ -138,8 +168,8 @@ const config: webpack.Configuration & { devServer?: webpackDevServer.Configurati
     extensions: [".ts", ".tsx", ".js", ".scss"],
   },
   externals: {
-    // react: "React",
-    // "react-dom": "ReactDOM",
+    react: "React",
+    "react-dom": "ReactDOM",
   },
 };
 
