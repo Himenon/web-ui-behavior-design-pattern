@@ -97,12 +97,12 @@ const config: webpack.Configuration & { devServer?: webpackDevServer.Configurati
   entry: {
     app: "./src/index.tsx",
   },
-  // cache: {
-  //   type: "filesystem",
-  //   buildDependencies: {
-  //     config: [__filename],
-  //   },
-  // },
+  cache: {
+    type: "filesystem",
+    buildDependencies: {
+      config: [__filename],
+    },
+  },
   devtool: "eval-source-map",
   output: {
     path: path.join(__dirname, "dist/js"),
