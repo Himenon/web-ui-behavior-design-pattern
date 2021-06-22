@@ -53,11 +53,20 @@ export const createPerformanceReport = async ({ isPullRequest, isLocal }: Option
         name: `${pkg.name}-cjs`,
         version: `${pkg.version}`,
         items: {
-          "dist/index.js": {
-            absolutePath: path.join(Config.applicationRoot, "dist/index.js"),
+          "dist/js/app.js": {
+            absolutePath: path.join(Config.applicationRoot, "dist/js/app.js"),
           },
-          "dist/index.css": {
-            absolutePath: path.join(Config.applicationRoot, "dist/index.css"),
+          "dist/js/essential.js": {
+            absolutePath: path.join(Config.applicationRoot, "dist/js/essential.js"),
+          },
+          "dist/js/style.js": {
+            absolutePath: path.join(Config.applicationRoot, "dist/js/style.js"),
+          },
+          "dist/js/vendor.js": {
+            absolutePath: path.join(Config.applicationRoot, "dist/js/vendor.js"),
+          },
+          "dist/stylesheets/app.css": {
+            absolutePath: path.join(Config.applicationRoot, "dist/stylesheets/app.css"),
           },
         },
       },

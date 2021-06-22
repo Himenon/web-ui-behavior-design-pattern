@@ -5,7 +5,6 @@ import * as path from "path";
 import resolvePkg from "resolve-pkg";
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
@@ -40,55 +39,58 @@ const essentialLibs = /(mobx|mobx-react|react-router|react-router-dom|history|we
 const buildPlugins: webpack.Configuration["plugins"] = [
   new BundleAnalyzerPlugin({
     analyzerMode: "static",
-    reportFilename: "../docs/bundle-analyzer.html",
+    reportFilename: "../../docs/bundle-analyzer.html",
     openAnalyzer: true,
     defaultSizes: "stat",
   }),
-  new MiniCssExtractPlugin({
-    filename: "[name].css",
-  }),
+  // new MiniCssExtractPlugin({
+  //   filename: "[name].css",
+  // }),
   new CopyPlugin({
     patterns: [
-      { from: "node_modules/react/umd/react.production.min.js", to: "js/react.production.min.js" },
-      { from: "node_modules/react-dom/umd/react-dom.production.min.js", to: "js/react-dom.production.min.js" },
-      { from: "node_modules/bootstrap/dist/css/bootstrap.min.css", to: "stylesheets/bootstrap.min.css" },
-      !isProduction && { from: "node_modules/bootstrap/dist/css/bootstrap.min.css.map", to: "stylesheets/bootstrap.min.css.map" },
+      { from: "node_modules/react/umd/react.production.min.js", to: "../js/react.production.min.js" },
+      { from: "node_modules/react-dom/umd/react-dom.production.min.js", to: "../js/react-dom.production.min.js" },
+      { from: "node_modules/bootstrap/dist/css/bootstrap.min.css", to: "../stylesheets/bootstrap.min.css" },
+      !isProduction && { from: "node_modules/bootstrap/dist/css/bootstrap.min.css.map", to: "../stylesheets/bootstrap.min.css.map" },
     ].filter(Boolean),
   }),
 ];
 
-const createCssLoader = (localIdentName: string) => [
-  {
-    loader: "css-loader",
-    options: {
-      modules: {
-        exportLocalsConvention: "camelCase",
-        localIdentName: localIdentName,
+const createCssLoader = (localIdentName: string) => {
+  const defaultLoaders = [
+    {
+      loader: "css-loader",
+      options: {
+        modules: {
+          exportLocalsConvention: "camelCase",
+          localIdentName: localIdentName,
+        },
+        importLoaders: 2,
       },
-      importLoaders: 2,
     },
-  },
-  {
-    loader: "postcss-loader",
-    options: {
-      postcssOptions: {
-        plugins: function () {
-          return [require("autoprefixer")];
+    {
+      loader: "postcss-loader",
+      options: {
+        postcssOptions: {
+          plugins: function () {
+            return [require("autoprefixer")];
+          },
         },
       },
     },
-  },
-  {
-    loader: "sass-loader",
-    options: {
-      implementation: require("sass"),
+    {
+      loader: "sass-loader",
+      options: {
+        implementation: require("sass"),
+      },
     },
-  },
-];
+  ];
+  if (isDevServer) {
+    return [{ loader: "style-loader", options: { esModule: false } }, ...defaultLoaders];
+  }
+  return defaultLoaders;
+};
 
-/**
- * @type {webpack.Configuration}
- */
 const config: webpack.Configuration & { devServer?: webpackDevServer.Configuration } = {
   mode: isProduction ? "production" : "development",
   target: isProduction ? ["web", "es5"] : "web",
@@ -103,19 +105,26 @@ const config: webpack.Configuration & { devServer?: webpackDevServer.Configurati
   // },
   devtool: "eval-source-map",
   output: {
-    path: path.join(__dirname, "dist"),
+    path: path.join(__dirname, "dist/js"),
     clean: true,
     pathinfo: false,
     publicPath: "/", // for react-router and historyApiFallback
   },
   optimization: {
-    minimize: isProduction,
+    // minimize: isProduction,
+    minimize: false,
     minimizer: ["...", new CssMinimizerPlugin()],
     splitChunks: {
       chunks: "initial",
       cacheGroups: {
         // default: false,
         // defaultVendors: false,
+        style: {
+          name: "style",
+          chunks: "initial",
+          test: /\.scss/,
+          enforce: true,
+        },
         essential: {
           name: "essential",
           chunks: "initial",
@@ -169,17 +178,7 @@ const config: webpack.Configuration & { devServer?: webpackDevServer.Configurati
       },
       {
         test: /\.s?css$/,
-        use: [
-          isDevServer
-            ? { loader: "style-loader", options: { esModule: false } }
-            : {
-                loader: MiniCssExtractPlugin.loader,
-                options: {
-                  esModule: false,
-                },
-              },
-          ...createCssLoader("__[local]_[hash:base64:5]__"),
-        ],
+        use: createCssLoader("__[local]_[hash:base64:5]__"),
       },
     ],
   },
