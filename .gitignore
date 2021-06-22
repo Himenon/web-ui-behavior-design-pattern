@@ -7,3 +7,4 @@ umd/
 cjs/
 src/**/*.scss.d.ts
 docs/
+.env*
