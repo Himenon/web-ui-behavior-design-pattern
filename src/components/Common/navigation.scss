@@ -1,5 +1,5 @@
 .navbar-brand {
-  composes: navbar-brandh from "../bootstrap/bootstrap.scss";
+  composes: navbar-brand from "../bootstrap/bootstrap.scss";
 
   &:hover {
     cursor: pointer;

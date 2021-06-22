@@ -2,7 +2,7 @@ import * as express from "express";
 import * as webpack from "webpack";
 import * as webpackDevServer from "webpack-dev-server";
 import * as path from "path";
-import * as resolvePkg from "resolve-pkg";
+import resolvePkg from "resolve-pkg";
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");

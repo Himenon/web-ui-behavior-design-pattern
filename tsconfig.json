@@ -22,7 +22,8 @@
     "noLib": false,
     "declaration": true,
     "jsx": "react",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "esModuleInterop": true
   },
   "exclude": ["./node_modules"],
   "ordered-imports": [

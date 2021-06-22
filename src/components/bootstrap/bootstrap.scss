@@ -1,14 +1,43 @@
-@import "~bootstrap/scss/bootstrap";
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
-@import "~bootstrap/scss/root";
-@import "~bootstrap/scss/reboot";
-@import "~bootstrap/scss/type";
-@import "~bootstrap/scss/images";
-@import "~bootstrap/scss/containers";
-@import "~bootstrap/scss/grid";
-@import "~bootstrap/scss/tables";
-@import "~bootstrap/scss/bootstrap-grid";
-@import "~bootstrap/scss/utilities";
-@import "~bootstrap/scss/buttons";
+// @import "~bootstrap/scss/bootstrap";
+// @import "~bootstrap/scss/functions";
+// @import "~bootstrap/scss/variables";
+// @import "~bootstrap/scss/mixins";
+// @import "~bootstrap/scss/root";
+// @import "~bootstrap/scss/reboot";
+// @import "~bootstrap/scss/type";
+// @import "~bootstrap/scss/images";
+// @import "~bootstrap/scss/containers";
+// @import "~bootstrap/scss/grid";
+// @import "~bootstrap/scss/tables";
+// @import "~bootstrap/scss/bootstrap-grid";
+// @import "~bootstrap/scss/utilities";
+// @import "~bootstrap/scss/buttons";
+
+$zindex-modal: 1000;
+
+.col,
+.col-sm,
+.row,
+.row-cols-1,
+.gx-5,
+.align-items-start,
+.container,
+.container-fluid,
+.navbar-collapse,
+.navbar,
+.navbar-expand-lg,
+.navbar-light,
+.bg-light,
+.navbar-brand,
+.position-absolute,
+.position-relative,
+.top-0,
+.top-50,
+.start-0,
+.start-50,
+.translate-middle,
+.btn,
+.btn-light,
+.btn-primary {
+  /*!*/
+}
