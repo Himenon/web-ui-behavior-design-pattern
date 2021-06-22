@@ -35,6 +35,8 @@ const devServerPlugins: webpack.Configuration["plugins"] = [
   }),
 ];
 
+const essentialLibs = /(mobx|mobx-react|react-router|react-router-dom|history|web-vital)/;
+
 const buildPlugins: webpack.Configuration["plugins"] = [
   new BundleAnalyzerPlugin({
     analyzerMode: "static",
@@ -91,7 +93,7 @@ const config: webpack.Configuration & { devServer?: webpackDevServer.Configurati
   mode: isProduction ? "production" : "development",
   target: isProduction ? ["web", "es5"] : "web",
   entry: {
-    index: "./src/index.tsx",
+    app: "./src/index.tsx",
   },
   // cache: {
   //   type: "filesystem",
@@ -107,17 +109,30 @@ const config: webpack.Configuration & { devServer?: webpackDevServer.Configurati
     publicPath: "/", // for react-router and historyApiFallback
   },
   optimization: {
-    minimize: false,
+    minimize: isProduction,
     minimizer: ["...", new CssMinimizerPlugin()],
     splitChunks: {
       chunks: "initial",
       cacheGroups: {
-        default: false,
-        defaultVendors: false,
+        // default: false,
+        // defaultVendors: false,
+        essential: {
+          name: "essential",
+          chunks: "initial",
+          test: (m: { resource: string }) => {
+            return essentialLibs.test(m.resource);
+          },
+          enforce: true,
+        },
         vendor: {
           name: "vendor",
           chunks: "initial",
-          test: /(?=.*node_modules)/,
+          test: (m: { resource: string }) => {
+            if (essentialLibs.test(m.resource)) {
+              return false;
+            }
+            return /node_modules/.test(m.resource);
+          },
           enforce: true,
         },
       },
