@@ -10,7 +10,7 @@ export interface Props extends BasePage.Props {
 export const Component: React.VFC<Props> = (props: Props) => {
   return (
     <BasePage.Component {...props}>
-      <div className={classNames.rootPage}>
+      <div className={["container", classNames.rootPage].join(" ")}>
         <h1 className={classNames.heading} {...props.heading} />
       </div>
     </BasePage.Component>

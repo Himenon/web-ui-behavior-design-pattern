@@ -54,7 +54,7 @@ export class Store {
         },
       },
       confirm: this.confirm,
-      status: {
+      statusTable: {
         items: [
           {
             name: "Status",

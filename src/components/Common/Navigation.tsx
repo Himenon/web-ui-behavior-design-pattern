@@ -12,13 +12,13 @@ export interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const Component: React.VFC<Props> = ({ ...props }: Props) => {
   return (
-    <nav className={classNames.navigationBar}>
-      <div className={classNames.containerFluid}>
-        <a className={classNames.navbarBrand} onClick={props.brand.onClick}>
+    <nav className={["navbar", "navbar-expand-lg", "navbar-light", "bg-light", classNames.navigationBar].join(" ")}>
+      <div className="container-fluid">
+        <a className={["navbar-brand", classNames.navbarBrand].join(" ")} onClick={props.brand.onClick}>
           {props.brand.linkText}
         </a>
-        <div className={classNames.navbarCollapse} id="navbarNav">
-          <ul className={classNames.navbarNav}>
+        <div className={"navbar-collapse"} id="navbarNav">
+          <ul className={"navbar-nav"}>
             {props.items.map(itemProps => (
               <NavItem.Component key={itemProps.linkText} {...itemProps} />
             ))}

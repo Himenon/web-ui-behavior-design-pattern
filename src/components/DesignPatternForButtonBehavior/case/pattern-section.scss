@@ -1,5 +1,3 @@
-@import "../../bootstrap/bootstrap.scss";
-
 .pattern-section {
   box-sizing: border-box;
   // border: 1px solid #ccc;
@@ -8,6 +6,21 @@
   padding: 16px;
   margin-bottom: 1.6em;
   height: 396px;
+}
+
+.button-column {
+  height: 160px;
+  text-align: center;
+  border: 1px solid #ccc;
+  background-color: #f8f9fa;
+}
+
+.row {
+  /*!*/
+}
+
+.button {
+  display: inline-block;
 }
 
 .heading {

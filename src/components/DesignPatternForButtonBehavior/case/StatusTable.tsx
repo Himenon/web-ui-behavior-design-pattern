@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as classNames from "./status.scss";
 
 export interface Item {
   name: string;
@@ -20,8 +19,8 @@ export const Component: React.VFC<Props> = ({ items, ...props }: Props) => {
     );
   });
   return (
-    <div className={classNames.status} {...props}>
-      <table className={classNames.table}>
+    <div {...props}>
+      <table className={"table"}>
         <thead>
           <tr>
             <th scope="col">Name</th>

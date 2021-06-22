@@ -17,7 +17,6 @@ export class Store {
   }
 
   private updateLocation(newLocation: Location) {
-    console.log(JSON.stringify(newLocation));
     this.state.location = newLocation;
   }
 

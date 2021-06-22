@@ -31,6 +31,7 @@ const devServerPlugins: webpack.Configuration["plugins"] = [
     PUBLIC_URL: "AA",
     React: isProduction ? publicPath + "/scripts/react.production.min.js" : "/scripts/react.development.js",
     ReactDOM: isProduction ? publicPath + "/scripts/react-dom.production.min.js" : "/scripts/react-dom.development.js",
+    BootstrapCSS: "/stylesheets/bootstrap.min.css",
   }),
 ];
 
@@ -46,10 +47,11 @@ const buildPlugins: webpack.Configuration["plugins"] = [
   }),
   new CopyPlugin({
     patterns: [
-      { from: "node_modules/bootstrap/dist/css/bootstrap.min.css", to: "stylesheets/bootstrap.min.css" },
       { from: "node_modules/react/umd/react.production.min.js", to: "js/react.production.min.js" },
       { from: "node_modules/react-dom/umd/react-dom.production.min.js", to: "js/react-dom.production.min.js" },
-    ],
+      { from: "node_modules/bootstrap/dist/css/bootstrap.min.css", to: "stylesheets/bootstrap.min.css" },
+      !isProduction && { from: "node_modules/bootstrap/dist/css/bootstrap.min.css.map", to: "stylesheets/bootstrap.min.css.map" },
+    ].filter(Boolean),
   }),
 ];
 
@@ -136,6 +138,8 @@ const config: webpack.Configuration & { devServer?: webpackDevServer.Configurati
       app.use("/favicon.ico", express.static("public/favicon.ico"));
       app.use("/scripts/react.development.js", express.static(find("react/umd/react.development.js")));
       app.use("/scripts/react-dom.development.js", express.static(find("react-dom/umd/react-dom.development.js")));
+      app.use("/stylesheets/bootstrap.min.css", express.static(find("bootstrap/dist/css/bootstrap.min.css")));
+      app.use("/stylesheets/bootstrap.min.css.map", express.static(find("bootstrap/dist/css/bootstrap.min.css.map")));
     },
   },
   module: {
