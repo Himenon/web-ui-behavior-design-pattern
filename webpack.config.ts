@@ -1,20 +1,21 @@
-const webpack = require("webpack");
-const path = require("path");
+import * as webpack from "webpack";
+import * as webpackDevServer from "webpack-dev-server";
+import * as path from "path";
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === "production";
-const isDevServer = false;
+const isDevServer = process.env.DEV_SERVER === "true";
 
-const cssLoaders = [
+const createCssLoader = (localIdentName: string) => [
   {
     loader: "css-loader",
     options: {
       modules: {
         exportLocalsConvention: "camelCase",
-        localIdentName: "__[local]_[hash:base64:5]__",
+        localIdentName: localIdentName,
       },
       importLoaders: 2,
     },
@@ -40,18 +41,18 @@ const cssLoaders = [
 /**
  * @type {webpack.Configuration}
  */
-const config = {
+const config: webpack.Configuration & { devServer?: webpackDevServer.Configuration } = {
   mode: isProduction ? "production" : "development",
   target: isProduction ? ["web", "es5"] : "web",
   entry: {
     index: "./src/index.tsx",
   },
-  cache: {
-    type: "filesystem",
-    buildDependencies: {
-      config: [__filename],
-    },
-  },
+  // cache: {
+  //   type: "filesystem",
+  //   buildDependencies: {
+  //     config: [__filename],
+  //   },
+  // },
   devtool: "eval-source-map",
   output: {
     path: path.join(__dirname, "dist"),
@@ -60,8 +61,21 @@ const config = {
     publicPath: "/", // for react-router and historyApiFallback
   },
   optimization: {
-    minimize: isProduction,
+    minimize: false,
     minimizer: ["...", new CssMinimizerPlugin()],
+    splitChunks: {
+      chunks: "initial",
+      cacheGroups: {
+        default: false,
+        defaultVendors: false,
+        vendor: {
+          name: "vendor",
+          chunks: "initial",
+          test: /(?=.*node_modules)/,
+          enforce: true,
+        },
+      },
+    },
   },
   plugins: [
     !isDevServer &&
@@ -115,7 +129,7 @@ const config = {
                   esModule: false,
                 },
               },
-          ...cssLoaders,
+          ...createCssLoader("__[local]_[hash:base64:5]__"),
         ],
       },
     ],
@@ -124,9 +138,9 @@ const config = {
     extensions: [".ts", ".tsx", ".js", ".scss"],
   },
   externals: {
-    react: "React",
-    "react-dom": "ReactDOM",
+    // react: "React",
+    // "react-dom": "ReactDOM",
   },
 };
 
-module.exports = config;
+export default config;

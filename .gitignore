@@ -6,3 +6,4 @@ module/
 umd/
 cjs/
 src/**/*.scss.d.ts
+docs/
