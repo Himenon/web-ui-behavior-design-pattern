@@ -1,4 +1,4 @@
-# Design patterns of behavior in Web UI
+# Web UIにおける動作のデザインパターン
 
 ## 目的
 

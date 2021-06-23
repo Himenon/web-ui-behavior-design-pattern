@@ -1,6 +1,6 @@
 # Design patterns of behavior in Web UI
 
-## 目的
+## Goal
 
 * Describe the pattern implemented in a web browser in the following way
   * Know how to implement it concretely = implementation is visible in CodeSandbox and GitHub
