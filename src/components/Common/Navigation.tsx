@@ -10,7 +10,7 @@ export interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   items: NavItem.Props[];
 }
 
-export const Component: React.VFC<Props> = ({ ...props }: Props) => {
+const Navigation: React.VFC<Props> = ({ ...props }: Props) => {
   return (
     <nav className={["navbar", "navbar-expand-lg", "navbar-light", "bg-light", classNames.navigationBar].join(" ")}>
       <div className="container-fluid">
@@ -28,3 +28,5 @@ export const Component: React.VFC<Props> = ({ ...props }: Props) => {
     </nav>
   );
 };
+
+export { Navigation as Component };

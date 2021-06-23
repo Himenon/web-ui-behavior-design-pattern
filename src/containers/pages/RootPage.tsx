@@ -10,9 +10,9 @@ export interface Props {
   store: Store;
 }
 
-export const Component: React.VFC<Props> = ({ store }: Props) => {
+const RootPageContainer: React.VFC<Props> = ({ store }: Props) => {
   const props = store.generateProps();
   return <View.Component {...props} />;
 };
 
-// export const Component = observer(Container);
+export { RootPageContainer as Component };

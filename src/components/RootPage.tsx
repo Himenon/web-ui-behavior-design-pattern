@@ -7,7 +7,7 @@ export interface Props extends BasePage.Props {
   heading: React.HTMLAttributes<HTMLHeadingElement>;
 }
 
-export const Component: React.VFC<Props> = (props: Props) => {
+const RootPage: React.VFC<Props> = (props: Props) => {
   return (
     <BasePage.Component {...props}>
       <div className={["container", classNames.rootPage].join(" ")}>
@@ -16,3 +16,6 @@ export const Component: React.VFC<Props> = (props: Props) => {
     </BasePage.Component>
   );
 };
+
+
+export { RootPage as Component };

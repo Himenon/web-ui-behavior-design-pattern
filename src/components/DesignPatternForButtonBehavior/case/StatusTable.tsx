@@ -9,7 +9,7 @@ export interface Props extends React.ButtonHTMLAttributes<HTMLElement> {
   items?: Item[];
 }
 
-export const Component: React.VFC<Props> = ({ items, ...props }: Props) => {
+const StatusTable: React.VFC<Props> = ({ items, ...props }: Props) => {
   const Rows = (items || []).map(item => {
     return (
       <tr key={item.name}>
@@ -32,3 +32,5 @@ export const Component: React.VFC<Props> = ({ items, ...props }: Props) => {
     </div>
   );
 };
+
+export { StatusTable as Component };

@@ -36,7 +36,7 @@ const createApplicationStores = (history: History): App.Stores => {
   return applicationStores;
 };
 
-const Container = () => {
+const RouterContainer = () => {
   const history = createBrowserHistory();
   const appStores = createApplicationStores(history);
   const routes = [
@@ -60,4 +60,4 @@ const Container = () => {
   );
 };
 
-export const Component = observer(Container);
+export const Component = observer(RouterContainer);

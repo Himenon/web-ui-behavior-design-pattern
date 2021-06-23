@@ -17,7 +17,7 @@ export interface Props extends BasePage.Props {
   transitionPatternSection?: TransitionPatternSection.Props;
 }
 
-export const Component: React.VFC<Props> = ({
+const DesignPatternForButtonBehaviorPage: React.VFC<Props> = ({
   heading,
   defaultPatternSection,
   blockingPatternSection,
@@ -51,3 +51,5 @@ export const Component: React.VFC<Props> = ({
     </BasePage.Component>
   );
 };
+
+export { DesignPatternForButtonBehaviorPage as Component };

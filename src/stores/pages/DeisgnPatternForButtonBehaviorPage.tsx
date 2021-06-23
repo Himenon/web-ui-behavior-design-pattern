@@ -6,6 +6,7 @@ import * as DebouncePatternSection from "./DesignPatternForButtonBehavior/Deboun
 import * as ThrottlePatternSection from "./DesignPatternForButtonBehavior/ThrottlePatternSection";
 import * as TransitionPatternSection from "./DesignPatternForButtonBehavior/TransitionPatternSection";
 
+
 export class Store {
   private readonly blockingPatternSection: BlockingPatternSection.Store;
   private readonly debouncePatternSection: DebouncePatternSection.Store;

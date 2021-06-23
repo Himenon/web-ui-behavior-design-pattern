@@ -7,7 +7,7 @@ export interface Props {
   closeButton: Button.Props;
 }
 
-export const Component: React.VFC<Props> = ({ closeButton, heading, ...props }: Props) => {
+const Confirm: React.VFC<Props> = ({ closeButton, heading, ...props }: Props) => {
   return (
     <section className={["position-absolute top-0 start-0", classNames.confirm].join(" ")} {...props}>
       <h2 className={["position-absolute start-50 translate-middle", classNames.heading].join(" ")} {...heading} />
@@ -15,3 +15,5 @@ export const Component: React.VFC<Props> = ({ closeButton, heading, ...props }: 
     </section>
   );
 };
+
+export { Confirm as Component };

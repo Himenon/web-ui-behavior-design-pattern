@@ -13,7 +13,7 @@ export interface Props extends React.HTMLAttributes<HTMLElement> {
   statusTable: StatusTable.Props;
 }
 
-export const Component: React.FC<Props> = ({ heading, confirm, button, statusTable, ...props }: Props) => {
+const PatternSection: React.FC<Props> = ({ heading, confirm, button, statusTable, ...props }: Props) => {
   return (
     <section className={classNames.patternSection} {...props}>
       <h2 className={classNames.heading} {...heading} />
@@ -29,3 +29,5 @@ export const Component: React.FC<Props> = ({ heading, confirm, button, statusTab
     </section>
   );
 };
+
+export { PatternSection as Component };

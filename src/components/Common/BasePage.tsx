@@ -7,7 +7,7 @@ export interface Props {
   navigation: Navigation.Props;
 }
 
-export const Component: React.FC<Props> = ({ ...props }) => {
+const BasePage: React.FC<Props> = ({ ...props }) => {
   return (
     <div>
       <Navigation.Component {...props.navigation} />
@@ -15,3 +15,5 @@ export const Component: React.FC<Props> = ({ ...props }) => {
     </div>
   );
 };
+
+export { BasePage as Component };
