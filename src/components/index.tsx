@@ -1,4 +1,4 @@
 export * as DeisgnPatternForButtonBehaviorPage from "./DeisgnPatternForButtonBehaviorPage";
 export * as DeisgnPatternForButtonBehavior from "./DesignPatternForButtonBehavior";
-export * as RootPage from "./RootPage";
+export * as IndexPage from "./IndexPage";
 export * as BasePage from "./Common/BasePage";

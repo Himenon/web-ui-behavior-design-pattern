@@ -1,9 +1,8 @@
 import * as React from "react";
-import { observer } from "mobx-react";
 import { Switch, Route, Router } from "react-router-dom";
 import { createBrowserHistory, createLocation, History } from "history";
-import * as DesignPatternButtonBehavior from "./design-pattern/button-behavior";
-import * as Root from "./root";
+import * as DesignPatternButtonBehavior from "./pages/design-pattern/button-behavior";
+import * as Index from "./pages";
 import type * as BootstrapTypes from "../stores/types/bootstrap";
 import type * as App from "../stores/types/application";
 import * as Browser from "../stores/browser";
@@ -36,7 +35,7 @@ const createApplicationStores = (history: History): App.Stores => {
   return applicationStores;
 };
 
-const RouterContainer = () => {
+export const Component = () => {
   const history = createBrowserHistory();
   const appStores = createApplicationStores(history);
   const routes = [
@@ -46,7 +45,7 @@ const RouterContainer = () => {
     },
     {
       path: appStores.domain.site.getUrl("root"),
-      render: () => <Root.Component {...appStores} />,
+      render: () => <Index.Component {...appStores} />,
     },
   ];
   return (
@@ -59,5 +58,3 @@ const RouterContainer = () => {
     </Router>
   );
 };
-
-export const Component = observer(RouterContainer);

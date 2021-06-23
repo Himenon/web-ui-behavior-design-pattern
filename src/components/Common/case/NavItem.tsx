@@ -7,7 +7,7 @@ export interface Props {
   onClick?: () => void;
 }
 
-export const Component: React.VFC<Props> = ({ ...props }: Props) => {
+const NavItem: React.VFC<Props> = ({ ...props }: Props) => {
   return (
     <li className={["navbar", "navbar-expand-lg", classNames.navItem].join(" ")}>
       <a className={["nav-link", classNames.navLink].join(" ")} onClick={props.onClick}>
@@ -16,3 +16,5 @@ export const Component: React.VFC<Props> = ({ ...props }: Props) => {
     </li>
   );
 };
+
+export { NavItem as Component };

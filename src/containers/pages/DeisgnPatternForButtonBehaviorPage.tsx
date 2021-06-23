@@ -1,4 +1,5 @@
 import * as React from "react";
+import { observer } from "mobx-react";
 
 import { DeisgnPatternForButtonBehaviorPage as View } from "../../components";
 import { DeisgnPatternForButtonBehaviorPage as Store } from "../../stores";
@@ -14,4 +15,4 @@ export const DesignPatternForButtonBehaviorPageContainer: React.VFC<Props> = ({ 
   return <View.Component {...props} />;
 };
 
-export { DesignPatternForButtonBehaviorPageContainer as Component };
+export const Component = observer(DesignPatternForButtonBehaviorPageContainer);

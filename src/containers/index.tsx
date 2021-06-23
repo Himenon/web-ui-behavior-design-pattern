@@ -1,2 +1,2 @@
 export * as DeisgnPatternForButtonBehaviorPage from "./pages/DeisgnPatternForButtonBehaviorPage";
-export * as RootPage from "./pages/RootPage";
+export * as IndexPage from "./pages/IndexPage";
