@@ -22,3 +22,7 @@ jobs:
           yarn install --frozen-lockfile
           yarn build
           yarn check:merge
+        env:
+          CI: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DATALAKE_GITHUB_TOKEN: ${{ secrets.DATALAKE_GITHUB_TOKEN }}
