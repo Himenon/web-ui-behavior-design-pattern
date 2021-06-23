@@ -1,10 +1,13 @@
 {
-  "name": "@himenon/behavior-design-pattern-for-web-ui",
+  "name": "@himenon/design-patterns-of-behavior-in-web-ui",
   "version": "1.0.0",
   "private": true,
   "description": "",
-  "keywords": [],
-  "license": "MIT",
+  "keywords": [
+    "design pattern",
+    "ui"
+  ],
+  "license": "CC-BY-SA-4.0",
   "main": "src/index.tsx",
   "scripts": {
     "develop": "run-p webpack:serve typed:scss:watch",
