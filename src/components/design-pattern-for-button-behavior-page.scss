@@ -1,7 +1,4 @@
-@import "./bootstrap/bootstrap.scss";
-
 .catalog-page {
-  composes: container;
   padding-top: 3em;
 }
 
@@ -11,31 +8,22 @@
   font-family: serif;
 }
 
-.wrapper {
-  composes: row gx-5 align-items-start;
-}
-
 .default-pattern-section {
-  composes: col;
   composes: default-pattern-section from "./DesignPatternForButtonBehavior/button-pattern-section.scss";
 }
 
 .blocking-pattern-section {
-  composes: col;
   composes: blocking-pattern-section from "./DesignPatternForButtonBehavior/button-pattern-section.scss";
 }
 
 .debounce-pattern-section {
-  composes: col;
   composes: debounce-pattern-section from "./DesignPatternForButtonBehavior/button-pattern-section.scss";
 }
 
 .throttle-pattern-section {
-  composes: col;
   composes: throttle-pattern-section from "./DesignPatternForButtonBehavior/button-pattern-section.scss";
 }
 
 .transition-pattern-section {
-  composes: col;
   composes: transition-pattern-section from "./DesignPatternForButtonBehavior/button-pattern-section.scss";
 }

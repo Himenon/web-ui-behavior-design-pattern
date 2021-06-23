@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x]
-        os: [windows-latest, ubuntu-latest]
+        os: [ubuntu-latest]
 
     steps:
       - uses: actions/checkout@v2
@@ -23,8 +23,10 @@ jobs:
 
       - name: Test & Build
         run: |
+          git config --global user.email "actions@gihub.com"
+          git config --global user.name "github-actions[bot]"
           yarn install --frozen-lockfile
-          yarn build
+          NODE_ENV=production yarn build
           yarn test
           yarn check:pr
         env:

@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as classNames from "./status.scss";
 
 export interface Item {
   name: string;
@@ -10,7 +9,7 @@ export interface Props extends React.ButtonHTMLAttributes<HTMLElement> {
   items?: Item[];
 }
 
-export const Component: React.VFC<Props> = ({ items, ...props }: Props) => {
+const StatusTable: React.VFC<Props> = ({ items, ...props }: Props) => {
   const Rows = (items || []).map(item => {
     return (
       <tr key={item.name}>
@@ -20,8 +19,8 @@ export const Component: React.VFC<Props> = ({ items, ...props }: Props) => {
     );
   });
   return (
-    <div className={classNames.status} {...props}>
-      <table className={classNames.table}>
+    <div {...props}>
+      <table className={"table"}>
         <thead>
           <tr>
             <th scope="col">Name</th>
@@ -33,3 +32,5 @@ export const Component: React.VFC<Props> = ({ items, ...props }: Props) => {
     </div>
   );
 };
+
+export { StatusTable as Component };

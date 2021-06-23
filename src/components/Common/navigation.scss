@@ -1,26 +1,17 @@
 .navbar-brand {
-  composes: navbar-brandh from "../bootstrap/bootstrap.scss";
-
   &:hover {
     cursor: pointer;
   }
 }
 
-.container-fluid {
-  composes: container-fluid from "../bootstrap/bootstrap.scss";
-}
-
 .navbar-collapse {
-  composes: navbar-collapse from "../bootstrap/bootstrap.scss";
+  /*!*/
 }
 
 .navbar-nav {
-  composes: navbar-nav from "../bootstrap/bootstrap.scss";
+  /*!*/
 }
 
 .navigation-bar {
-  composes: navbar from "../bootstrap/bootstrap.scss";
-  composes: navbar-expand-lg from "../bootstrap/bootstrap.scss";
-  composes: navbar-light from "../bootstrap/bootstrap.scss";
-  composes: bg-light from "../bootstrap/bootstrap.scss";
+  /*!*/
 }

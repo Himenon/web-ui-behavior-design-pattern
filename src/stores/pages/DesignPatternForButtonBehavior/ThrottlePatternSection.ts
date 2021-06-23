@@ -47,7 +47,7 @@ export class Store {
           );
         },
       },
-      status: {
+      statusTable: {
         items: [
           {
             name: "Status",

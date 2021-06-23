@@ -10,9 +10,9 @@ export interface Props {
   store: Store;
 }
 
-export const Container: React.VFC<Props> = ({ store }: Props) => {
+export const DesignPatternForButtonBehaviorPageContainer: React.VFC<Props> = ({ store }: Props) => {
   const props = store.generateProps();
   return <View.Component {...props} />;
 };
 
-export const Component = observer(Container);
+export const Component = observer(DesignPatternForButtonBehaviorPageContainer);

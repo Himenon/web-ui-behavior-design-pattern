@@ -34,7 +34,7 @@ export class Store {
   }
   public generateProps = (): View.Props => {
     return {
-      status: {
+      statusTable: {
         items: [
           {
             name: "Status",

@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import type { RootPage } from "../../components";
+import type { IndexPage } from "../../components";
 import type * as Types from "../types/application";
 
 export class Store {
@@ -7,7 +7,7 @@ export class Store {
     makeAutoObservable(this);
   }
 
-  public generateProps = (): RootPage.Props => {
+  public generateProps = (): IndexPage.Props => {
     return {
       navigation: this.stores.view.navigation.generateProps(),
       heading: {

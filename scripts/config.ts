@@ -15,7 +15,7 @@ export const gitConfig = (authToken?: string): PerformanceReport.Git => ({
   },
 });
 
-export const applicationRoot = path.join(__dirname, "../../");
+export const applicationRoot = path.join(__dirname, "../");
 export const workingDirectory = path.join(applicationRoot, "node_modules/.cache/performance-report");
 export const snapshot = {
   filesize: "filesize.json",

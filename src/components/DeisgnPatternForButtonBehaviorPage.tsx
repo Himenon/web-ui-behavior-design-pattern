@@ -17,7 +17,7 @@ export interface Props extends BasePage.Props {
   transitionPatternSection?: TransitionPatternSection.Props;
 }
 
-export const Component: React.VFC<Props> = ({
+const DesignPatternForButtonBehaviorPage: React.VFC<Props> = ({
   heading,
   defaultPatternSection,
   blockingPatternSection,
@@ -28,16 +28,28 @@ export const Component: React.VFC<Props> = ({
 }: Props) => {
   return (
     <BasePage.Component {...props}>
-      <div className={classNames.catalogPage}>
+      <div className={["container", classNames.catalogPage].join(" ")}>
         <h1 className={classNames.heading} {...heading} />
-        <div className={classNames.wrapper}>
-          {defaultPatternSection && <DefaultPatternSection.Component className={classNames.defaultPatternSection} {...defaultPatternSection} />}
-          {blockingPatternSection && <BlockingPatternSection.Component className={classNames.blockingPatternSection} {...blockingPatternSection} />}
-          {debouncePatternSection && <DebouncePatternSection.Component className={classNames.debouncePatternSection} {...debouncePatternSection} />}
-          {throttlePatternSection && <ThrottlePatternSection.Component className={classNames.throttlePatternSection} {...throttlePatternSection} />}
-          {transitionPatternSection && <TransitionPatternSection.Component className={classNames.transitionPatternSection} {...transitionPatternSection} />}
+        <div className={"row gx-5 align-items-start"}>
+          {defaultPatternSection && (
+            <DefaultPatternSection.Component className={["col", classNames.defaultPatternSection].join(" ")} {...defaultPatternSection} />
+          )}
+          {blockingPatternSection && (
+            <BlockingPatternSection.Component className={["col", classNames.blockingPatternSection].join(" ")} {...blockingPatternSection} />
+          )}
+          {debouncePatternSection && (
+            <DebouncePatternSection.Component className={["col", classNames.debouncePatternSection].join(" ")} {...debouncePatternSection} />
+          )}
+          {throttlePatternSection && (
+            <ThrottlePatternSection.Component className={["col", classNames.throttlePatternSection].join(" ")} {...throttlePatternSection} />
+          )}
+          {transitionPatternSection && (
+            <TransitionPatternSection.Component className={["col", classNames.transitionPatternSection].join(" ")} {...transitionPatternSection} />
+          )}
         </div>
       </div>
     </BasePage.Component>
   );
 };
+
+export { DesignPatternForButtonBehaviorPage as Component };
